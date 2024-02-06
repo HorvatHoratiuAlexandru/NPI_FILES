@@ -1,21 +1,22 @@
-version: '3'
+version: "3"
 
 services:
   db:
     image: docker.io/postgres:latest
     volumes:
-      - npi_files_dbdata:/var/lib/postgresql/data 
+      - npi_files_dbdata:/var/lib/postgresql/data
     ports:
       - 5432:5432
     env_file:
       - backend/.env
 
   django_app:
-      container_name: django-app
-      build: .
-      image: npi_backend:latest
-      ports:
-        - 8080:8000
+    container_name: django-app
+    image: npi_backend:latest
+    ports:
+      - 8060:8000
+    env_file:
+      - backend/.env
 
   # frontendapp:
   #     container_name: frontend-container
@@ -25,7 +26,6 @@ services:
   #       - 4200:4200
   #     expose:
   #       - 4200
-    
+
 volumes:
   npi_files_dbdata:
-    
